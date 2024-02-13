@@ -4,8 +4,8 @@
             <v-card>
                 <v-card-title primary-title class="py-2">
                     <v-row>
-                        <v-col cols="9"><h5 class="font-weight-bold text-h5 text-typo mb-0">DATA POSISI / JABATAN</h5>
-                            <p class="text-sm text-body font-weight-light mb-0"> Features include sorting, searching, pagination, content-editing, and row selection. </p></v-col>
+                        <v-col cols="9"><h5 class="font-weight-bold text-h5 text-typo mb-0">DATA ITEM</h5>
+                            </v-col>
                         <v-col cols="3"><searchbar @add="add" @search="search" @change="query"></searchbar></v-col>
                     </v-row>                
                 </v-card-title>
@@ -63,7 +63,7 @@ module.exports = {
         THEME () { return this.$store.state.app.THEME },
 
         headers () {
-            let h = [['NAMA', 'position_name'],['CATATAN', 'position_note', 0, 'start'],['TODO', null, '10%','center']]
+            let h = [['KODE', 'item_code'],['NAMA', 'item_name'],['KATEGORI', 'item_category'],['UNIT', 'item_unit']]
             let hdrs = []
             for (let x of h) {
                 hdrs.push({text: x[0], align: x[3]?x[3]:'start', sortable: false, value: x[1]?x[1]:'', 
