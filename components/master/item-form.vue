@@ -55,7 +55,7 @@
                     <v-col cols="12" md="6" lg="4" class="pa-5">
                     
                         <v-text-field
-                            label="Kode Barang" v-model="positionName" placeholder="Kode"
+                            label="Kode Barang" v-model="positionCode" placeholder="Kode"
                         ></v-text-field>
 
                         <v-text-field
@@ -63,11 +63,11 @@
                         ></v-text-field>
 
                         <v-select
-                            label="Kategori" v-model="positionName" placeholder="Kategori"
+                            label="Kategori" placeholder="Kategori"
                         ></v-select>
 
                         <v-select
-                            label="Satuan" v-model="positionName" placeholder="Satuan"
+                            label="Satuan" placeholder="Satuan"
                         ></v-select>
                         
                     </v-col>
@@ -94,7 +94,7 @@ module.exports = {
     },
 
     computed : {
-      __s () { return this.$store.state.masterPosition },
+      __s () { return this.$store.state.masterItem },
 
       edit () {
         return this.__s.edit
@@ -105,20 +105,20 @@ module.exports = {
           set (v) { this.__c("dialog", v) }
       },
 
+      positionCode : {
+        get () { return this.__s.positionCode },
+        set (v) { this.__c("positionCode", v) }
+      },
+
       positionName : {
         get () { return this.__s.positionName },
         set (v) { this.__c("positionName", v) }
-      },
-
-      positionNote : {
-        get () { return this.__s.positionNote },
-        set (v) { this.__c("positionNote", v) }
       }
     },
 
     methods : {
-      __c (a,b) { return this.$store.commit("masterPosition/SET_OBJECT", [a, b]) },
-      __d (a) { return this.$store.dispatch("masterPosition/"+a) },
+      __c (a,b) { return this.$store.commit("masterItem/SET_OBJECT", [a, b]) },
+      __d (a) { return this.$store.dispatch("masterItem/"+a) },
 
       save () {
         this.__d("save").then((x) => {
