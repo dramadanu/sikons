@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 if ($_SERVER['SERVER_NAME'] == 'localhost')
-    $config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].':3000/sibambo/_api';
+    $config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].':3000/sikons/_api';
 else
     $config['base_url'] = 'https://'.$_SERVER['SERVER_NAME'].'/_api';
 

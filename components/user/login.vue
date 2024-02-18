@@ -14,13 +14,13 @@
         </template>
 
         <v-card-title class="font-weight-semibold text-2xl text-uppercase">
-          Sibambo
+          Sicons
         </v-card-title>
       </v-card-item>
 
       <v-card-text class="pt-2">
         <h5 class="text-h5 font-weight-semibold mb-1">
-          Welcome to SiBambo Studio 👋🏻
+          Welcome to SiBambo Construction 👋🏻
         </h5>
         <p class="mb-0">
           Please sign-in to your account and start the adventure

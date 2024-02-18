@@ -19,11 +19,12 @@
                     >
                     <template v-slot:item="{ item }">                                                   
                         <tr @click="select(item)" :class="[isSelected(item)?'blue lighten-5':'']">
-                            <td><span v-if="item.position_code.length>2" class="grey--text">{{ '&nbsp'.repeat((item.position_code.length-4)*2) }} ▌ </span>
-                                {{ item.position_name }}</td>
-                            <td>{{ item.position_note }}</td>
+                            <td>{{ item.item_code }}</td>
+                            <td>{{ item.item_name }}</td>
+                            <td>{{ item.item_category }}</td>
+                            <td>{{ item.item_unit }}</td>
                             <td class="text-center">
-                                <v-btn color="primary" class="" icon depressed @click="edit(item)" small>
+                                <v-btn color="primary" class="btn-icon" icon depressed @click="edit(item)" small>
                                     <v-icon>mdi-pencil</v-icon>
                                 </v-btn>
                                 <v-btn color="red red-lighten-5--text" icon depressed @click="del(item)" small>
@@ -63,7 +64,12 @@ module.exports = {
         THEME () { return this.$store.state.app.THEME },
 
         headers () {
-            let h = [['KODE', 'item_code'],['NAMA', 'item_name'],['KATEGORI', 'item_category'],['UNIT', 'item_unit']]
+            let h = [
+                ['KODE', 'item_code'],
+                ['NAMA', 'item_name'],
+                ['KATEGORI', 'item_category'],
+                ['UNIT', 'item_unit']
+            ]
             let hdrs = []
             for (let x of h) {
                 hdrs.push({text: x[0], align: x[3]?x[3]:'start', sortable: false, value: x[1]?x[1]:'', 
@@ -73,13 +79,13 @@ module.exports = {
             return hdrs
         },
 
-        positions () {
-            return this.__s.positions
+        items () {
+            return this.__s.items
         },
 
-        selectedPosition : {
-            get () { return this.__s.selectedPosition },
-            set (v) { this.__c("selectedPosition", v) }
+        selectedItem : {
+            get () { return this.__s.selectedItem },
+            set (v) { this.__c("selectedItem", v) }
         },
 
         total () {
@@ -97,10 +103,10 @@ module.exports = {
     },
 
     methods : {
-        __c (a,b) { return this.$store.commit("masterPosition/SET_OBJECT", [a, b]) },
+        __c (a,b) { return this.$store.commit("masterItem/SET_OBJECT", [a, b]) },
 
         search () {
-            this.$store.dispatch("masterPosition/search")
+            this.$store.dispatch("masterItem/search")
         },
 
         query (v) {
@@ -109,18 +115,22 @@ module.exports = {
         },
 
         add () {
-            this.__c("positionName", "")
-            this.__c("positionNote")
-            this.__c("posId", 0)
+            this.__c("itemCode", "")
+            this.__c("itemName")
+            this.__c("itemCategory")
+            this.__c("itemUnit")
+            this.__c("itemId", 0)
             this.__c("edit", false)
             this.__c("dialog", true)
         },
 
         edit (x) {
             this.select(x)
-            this.__c("positionName", x.position_name)
-            this.__c("positionNote", x.position_note)
-            this.__c("posId", x.position_id)
+            this.__c("itemCode", x.item_code)
+            this.__c("itemName", x.item_name)
+            this.__c("itemCategory", x.item_category)
+            this.__c("itemUnit", x.item_unit)
+            this.__c("itemId", x.item_id)
             this.__c("edit", true)
             this.__c("dialog", true)
         },
@@ -131,7 +141,7 @@ module.exports = {
         },
 
         doDel () {
-            this.$store.dispatch("masterPosition/delete").then((d) => {
+            this.$store.dispatch("masterItem/delete").then((d) => {
                 this.$store.commit("misc/SET_OBJECT", ["dialogDelete", false])
                 this.search()
             })
@@ -142,8 +152,8 @@ module.exports = {
         },
 
         isSelected (x) {
-            if (!x || !this.selectedPosition) return false
-            if (x.position_id == this.selectedPosition.position_id) return true
+            if (!x || !this.selectedItem) return false
+            if (x.item_id == this.selectedItem.item_id) return true
             return false
         }
     },

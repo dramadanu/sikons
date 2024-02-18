@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="../../../assets/css/style.css">
         <link rel="stylesheet" href="../../../material.css">
+        <link href="https://assets-global.website-files.com/63d0f93b8842ec945ab130c6/651a89a898eca9a6ff71af1f_sm-ico-sbm.png" rel="shortcut icon" type="image/x-icon">
         
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -25,18 +26,18 @@
         <div id="app">
             <v-app :dark="true">
                 <v-main>
-                    <v-container fluid fill-height>
+                    <v-container fluid fill-height class="py-0 py-md-2 py-lg-3">
                         <v-row class="fill-height">
                             <v-col
                                 cols="12" md="8" class="d-none d-md-flex position-relative"
                             >
-
+                                <img :src="logo" style="height:70px" class="ml-2"/>
                             </v-col>
                             <v-col
                                 cols="12"
                                 sm="12"
                                 md="4"
-                                class="align-center justify-center auth-card-v2 d-flex white grow"
+                                class="align-center justify-center auth-card-v2 d-flex grow login-box"
                             >
                                 <loginform></loginform>
                             </v-col>
@@ -48,6 +49,14 @@
         </div>
     </body>
     <style scoped>
+        .container { 
+            background-image: url(https://assets-global.website-files.com/63d0f93b8842ec945ab130c6/6513c0307c7d701e57f62433_Bayt%20A%27elat.webp);
+            background-size: cover;
+        }
+
+        .login-box {
+            background-color: rgba(255,255,255,.95);
+        }
     </style>
     <script type="module">
   const BASE_URL = "../../../"
@@ -72,7 +81,10 @@
     },
 
     computed: {
-      __s () { return this.$store.state.masterPosition }
+      __s () { return this.$store.state.masterPosition },
+
+      logo () { return BASE_URL + 'assets/img/logo-sikons.png' },
+      rel_icon () { return this.$store.state.APP_REL_ICON }
     }, 
           
     methods: { 
@@ -80,7 +92,7 @@
     },
 
     mounted () {
-      this.$store.dispatch("masterPosition/search")
+      // this.$store.dispatch("masterPosition/search")
 
       document.title = this.$store.state.APP_NAME
     }

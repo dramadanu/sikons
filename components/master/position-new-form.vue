@@ -3,35 +3,6 @@
         <v-col cols="12">
             <v-card class="rounded-3">
 
-                <!-- <v-toolbar
-                    flat :dark="dark"
-                >
-                    <v-btn
-                    icon
-                    :dark="dark"
-                    @click="dialog = false"
-                    >
-                      <v-icon>mdi-arrow-left</v-icon>
-                    </v-btn>
-                    <v-toolbar-title class="pl-2">{{ !edit?'INPUT':'UBAH' }} DATA POSISI / JABATAN</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items class="py-1">
-                      <v-btn
-                        icon
-                        :dark="dark"
-                        @click="dialog = false"
-                        >
-                        <v-icon>mdi-arrow-left</v-icon>
-                      </v-btn>
-                      <v-btn
-                        :dark="dark"
-                          class="primary rounded-3"
-                          @click="save"
-                      >
-                          Simpan
-                      </v-btn>
-                    </v-toolbar-items>
-                </v-toolbar> -->
                 <v-card-title class="px-5">
                   {{ !edit?'INPUT':'UBAH' }} DATA POSISI / JABATAN
                   <v-spacer></v-spacer>

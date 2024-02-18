@@ -161,7 +161,7 @@ module.exports = {
       profile () {
         return {
           avatar: true,
-          title: 'SIBAMBO'//this.$t('avatar'),
+          title: 'SIKONS'//this.$t('avatar'),
         }
       },
     },

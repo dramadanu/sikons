@@ -1,40 +1,50 @@
 <template>
-    <v-row>
+    <v-row justify="center">
         <v-col cols="12">
-            <v-card>
-                <v-card-title primary-title class="bg-info white--text py-2">
-                    <v-row>
-                        <v-col cols="12"><h3 class="display-1">SALES</h3></v-col>
-                    </v-row>
-                    <div class="bg-purple-darken-2 text-center">
-                    <v-btn>SIMPAN</v-btn>
-                    </div>
+            <v-card class="rounded-3">
+
+                <v-card-title class="px-5">
+                  {{ !edit?'INPUT':'UBAH' }} ITEM
+                  <v-spacer></v-spacer>
+                  <v-btn
+                        icon
+                        :dark="dark"
+                        @click="dialog = false" class="mr-3"
+                        >
+                        <v-icon>mdi-arrow-left</v-icon>
+                      </v-btn>
+                  <v-btn
+                        :dark="dark"
+                          class="primary rounded-3"
+                          @click="save"
+                      >
+                          Simpan
+                      </v-btn>
                 </v-card-title>
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="6" lg="4" class="pa-5">
+                    
+                        <v-text-field
+                            label="No." v-model="itemCode" placeholder=""
+                        ></v-text-field>
 
+                        <v-text-field
+                            label="Nama PIC" v-model="itemName" placeholder=""
+                        ></v-text-field>
 
-        <v-row no-gutters>
-            <v-col>
-                <v-card-text class="py-2 px-3">
-                    <v-text-field label="No" variant="outlined"></v-text-field>
-                </v-card-text>
-            </v-col>
-            <v-col>
-                <v-row no-gutters>
-                    <v-col>
-                <v-card-text class="py-2 px-3">
-                    <v-text-field label="Nama PIC" variant="outlined"></v-text-field>
-                </v-card-text>
+                        <v-text-field
+                            label="No. HP" v-model="itemName" placeholder=""
+                        ></v-text-field>
+                        
                     </v-col>
-                    <v-col>
-                <v-card-text class="py-2 px-3">
-                    <v-text-field label="No. HP" variant="outlined"></v-text-field>
+                  </v-row>
                 </v-card-text>
-                    </v-col>
-                </v-row>
-            </v-col>
-        </v-row>
-
-</template>
+            </v-card>
+        </v-col>
+        
+    </v-row>
+  </template>
 
 
 <script>

@@ -1,5 +1,5 @@
-export const URL = window.location.host.indexOf("onecode") > -1 ? "https://sibambo.onecode.id/" : window.location.protocol+"//"+window.location.host+"/sibambo/"
-export const APP_NAME = "HRIS"
+export const URL = window.location.host.indexOf("onecode") > -1 ? "https://sikons.onecode.id/" : window.location.protocol+"//"+window.location.host+"/sikons/"
+export const APP_NAME = "SIKONS"
 
 export async function ajaxPost(u, p, h) {
     try {

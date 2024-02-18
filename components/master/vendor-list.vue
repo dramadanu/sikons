@@ -2,22 +2,23 @@
     <v-row>
         <v-col cols="12">
             <v-card>
-                <v-card-title primary-title class="bg-info white--text py-2">
+                <v-card-title primary-title class="py-2">
                     <v-row>
-                        <v-col cols="9"><h3 class="display-1">DATA VENDOR</h3></v-col>
+                        <v-col cols="9"><h5 class="font-weight-bold text-h5 text-typo mb-0">DATA VENDOR</h5>
+                            </v-col>
                         <v-col cols="3"><searchbar @add="add" @search="search" @change="query"></searchbar></v-col>
-                    </v-row>
+                    </v-row>                
                 </v-card-title>
                 <v-card-text class="py-2 px-3">
                     <v-data-table
                         :headers="headers"
-                        :items="vendors"
+                        :items="positions"
                         :items-per-page="10"
                         class="elevation-1"
                         hide-default-footer
                     >
-                    <template v-slot:item="{ item }">
-                        <tr>
+                    <template v-slot:item="{ item }">                                                   
+                        <tr @click="select(item)" :class="[isSelected(item)?'blue lighten-5':'']">
                             <td>{{ item.vendor_number }}</td>
                             <td>{{ item.vendor_name }}</td>
                             <td>{{ item.employee_address }}</td>
