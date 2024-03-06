@@ -17,17 +17,16 @@
                         class="elevation-1"
                         hide-default-footer
                     >
-                    <template v-slot:expense="{ expense }">                                                   
-                        <tr @click="select(expense)" :class="[isSelected(expense)?'blue lighten-5':'']">
-                            <td>{{ expense.expense_id }}</td>
+                    <template v-slot:item="{ item }">
+                        <tr @click="select(item)" :class="[isSelected(item)?'blue lighten-5':'']">
                             <td>{{ expense.expense_code }}</td>
                             <td>{{ expense.expense_name }}</td>
-                            <td>{{ expense.expense_categoryid }}</td>
+                            <td>{{ expense.expense_category }}</td>
                             <td class="text-center">
-                                <v-btn color="primary" class="btn-icon" icon depressed @click="edit(expense)" small>
+                                <v-btn color="primary" class="" icon depressed @click="edit(item)" small>
                                     <v-icon>mdi-pencil</v-icon>
                                 </v-btn>
-                                <v-btn color="red red-lighten-5--text" icon depressed @click="del(expense)" small>
+                                <v-btn color="red red-lighten-5--text" icon depressed @click="del(item)" small>
                                     <v-icon>mdi-delete</v-icon>
                                 </v-btn>
                             </td>
@@ -65,10 +64,9 @@ module.exports = {
 
         headers () {
             let h = [
-                ['ID', 'expense_id'],
                 ['KODE', 'expense_code'],
                 ['NAMA', 'expense_name'],
-                ['KATEGORI_ID', 'expense_categoryid']
+                ['KATEGORI', 'expense_categoryid']
             ]
             let hdrs = []
             for (let x of h) {
@@ -79,13 +77,13 @@ module.exports = {
             return hdrs
         },
 
-        expens () {
-            return this.__s.expens
+        positions () {
+            return this.__s.positions
         },
 
-        selectedexpens : {
-            get () { return this.__s.selectedexpens },
-            set (v) { this.__c("selectedexpens", v) }
+        selectedExpense : {
+            get () { return this.__s.selectedExpense },
+            set (v) { this.__c("selectedExpense", v) }
         },
 
         total () {
@@ -103,10 +101,10 @@ module.exports = {
     },
 
     methods : {
-        __c (a,b) { return this.$store.commit("masterexpense/SET_OBJECT", [a, b]) },
+        __c (a,b) { return this.$store.commit("selectedExpense/SET_OBJECT", [a, b]) },
 
         search () {
-            this.$store.dispatch("masterexpense/search")
+            this.$store.dispatch("selectedExpense/search")
         },
 
         query (v) {
@@ -115,20 +113,20 @@ module.exports = {
         },
 
         add () {
-            this.__c("expenseCode", "")
-            this.__c("expenseName")
-            this.__c("expenseCategoryID")
-            this.__c("expenseId", 0)
+            this.__c("expense_code")
+            this.__c("expense_name")
+            this.__c("expense_categoryid")
+            this.__c("posId", 0)
             this.__c("edit", false)
             this.__c("dialog", true)
         },
 
         edit (x) {
             this.select(x)
-            this.__c("expenseCode", x.expense_code)
             this.__c("expenseName", x.expense_name)
-            this.__c("expenseCategoryID", x.expense_category)
-            this.__c("expenseId", x.expense_id)
+            this.__c("expenseCode", x.expense_code)
+            this.__c("expenseCaetgory", x.expense_category)
+            this.__c("posId", x.expense_id)
             this.__c("edit", true)
             this.__c("dialog", true)
         },
@@ -139,19 +137,19 @@ module.exports = {
         },
 
         doDel () {
-            this.$store.dispatch("masterExpense/delete").then((d) => {
+            this.$store.dispatch("materExpense/delete").then((d) => {
                 this.$store.commit("misc/SET_OBJECT", ["dialogDelete", false])
                 this.search()
             })
         },
 
         select (x) {
-            this.selectedPosition = x
+            this.selectedExpense = x
         },
 
         isSelected (x) {
-            if (!x || !this.selectedexpense) return false
-            if (x.expense_id == this.selectedexpense.expense_id) return true
+            if (!x || !this.selectedExpense) return false
+            if (x.position_id == this.selectedExpense.expense_id) return true
             return false
         }
     },

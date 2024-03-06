@@ -9,6 +9,14 @@ export default {
         selectedProvince: null,
         provinceSearch: '',
 
+        districtSearch: "",
+        districts: [],
+        selectedDistrict: null,
+
+        villageSearch: "",
+        villages: [],
+        selectedVillage: null,
+
         // dialogs
         dialogDelete: false,
         dialogDelete02: false,
@@ -59,7 +67,7 @@ export default {
 
         async searchCity (context) {
             let prm = {
-                province_id: context.state.selectedProvince,
+                province_id: context.state.selectedProvince.province_id,
                 search: context.state.citySearch
             }
 
@@ -68,6 +76,38 @@ export default {
                 prm: prm,
                 callback: function(d) {
                     context.commit("SET_OBJECT", ["cities", d.records])
+                    return d
+                }
+            }, { root: true })
+        },
+
+        async searchDistrict (context) {
+            let prm = {
+                city_id: context.state.selectedCity.city_id,
+                search: context.state.districtSearch
+            }
+
+            return context.dispatch("postme", {
+                url: "master/district/search",
+                prm: prm,
+                callback: function(d) {
+                    context.commit("SET_OBJECT", ["districts", d.records])
+                    return d
+                }
+            }, { root: true })
+        },
+
+        async searchVillage (context) {
+            let prm = {
+                district_id: context.state.selectedDistrict.district_id,
+                search: context.state.villageSearch
+            }
+
+            return context.dispatch("postme", {
+                url: "master/kelurahan/search",
+                prm: prm,
+                callback: function(d) {
+                    context.commit("SET_OBJECT", ["villages", d.records])
                     return d
                 }
             }, { root: true })

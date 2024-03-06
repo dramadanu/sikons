@@ -17,7 +17,7 @@ class M_Position extends MY_Model
         $l = ['records'=>[], 'total'=>0, 'total_page'=>1];
 
         $r = $this->db->query(
-                "SELECT M_PositionID position_id, M_PositionCode position_code, M_PositionName position_name, M_PositionNote position_note
+                "SELECT M_PositionID position_id, IFNULL(M_PositionCode, '') position_code, M_PositionName position_name, M_PositionNote position_note
                 FROM `{$this->table_name}`
                 WHERE `M_PositionName` LIKE ?
                 AND `M_PositionIsActive` = 'Y'

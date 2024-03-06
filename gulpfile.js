@@ -60,7 +60,7 @@ function serve() {
 //   });
 
   browserSync.init({
-    proxy: 'localhost/sikons/' // Update with your CodeIgniter app's local URL
+    proxy: 'localhost/sibambo/' // Update with your CodeIgniter app's local URL
   });
 
   gulp.watch('modules/misc/*.js', scripts); 

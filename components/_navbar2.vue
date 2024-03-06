@@ -19,14 +19,14 @@
           contain
         >
           <v-img
-            src="https://uploads-ssl.webflow.com/64d331c45cab998e118c8cc8/64d906180fd150d77f23abfe_logo%sikons%20studio-04.webp"
+            src="https://uploads-ssl.webflow.com/64d331c45cab998e118c8cc8/64d906180fd150d77f23abfe_logo%20sibambo%20studio-04.webp"
             max-height="30"></v-img>
         </v-list-item-avatar> -->
 
         <v-list-item-content>
-          <img src="../../../assets/img/logo-sikons.png" style="max-height: 35px; object-fit: contain;" />
+          <img src="../../../assets/img/logo-sibambo-small.png" style="max-height: 35px; object-fit: contain;" />
           <!-- <v-img
-            src="../../../assets/img/logo-sikons.png"
+            src="../../../assets/img/logo-sibambo.png"
             max-height="35"></v-img> -->
         </v-list-item-content>
       </v-list-item>

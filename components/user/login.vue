@@ -3,24 +3,25 @@
   <!-- <div class="auth-wrapper d-flex align-center justify-center pa-4"> -->
     <v-row><v-col>
     <v-card
-      class="auth-card pa-4 pt-7"
-      max-width="448" flat
+      class="auth-card pa-4 pt-7 mx-auto"
+      max-width="448" flat style="background-color: transparent !important;"
     >
-      <v-card-item class="justify-center">
-        <template #prepend>
-          <div class="d-flex">
+      <!-- <v-card-title class="justify-center"> -->
+        <!-- <template #prepend>
+          <div class="d-flex"> -->
             <!-- <div v-html="logo" /> -->
-          </div>
-        </template>
+          <!-- </div>
+        </template> -->
 
-        <v-card-title class="font-weight-semibold text-2xl text-uppercase">
-          Sicons
+        <v-card-title class="font-weight-semibold text-2xl text-uppercase primary--text text-h3 justify-center d-flex">
+          <img :src="logo" style="height:70px" class="ml-2 d-md-none"/>
+          <div class="d-none d-md-block text-left" style="width:100%;font-family:Roboto !important">Sibambo Konstruksi</div>
         </v-card-title>
-      </v-card-item>
+      <!-- </v-card-title> -->
 
-      <v-card-text class="pt-2">
+      <v-card-text class="pt-2" :class="[$vuetify.breakpoint.smAndDown?'text-center':'text-left']">
         <h5 class="text-h5 font-weight-semibold mb-1">
-          Welcome to SiBambo Construction 👋🏻
+          Welcome to SiBambo Konstruksi 👋🏻
         </h5>
         <p class="mb-0">
           Please sign-in to your account and start the adventure
@@ -35,6 +36,11 @@
               <v-text-field
                 label="Email"
                 type="email" outlined
+                v-model="userName"
+                :error-messages="userNameErrorMessages"
+                :error-count="userNameErrorCount"
+                :error="userNameError"
+                autocomplete="off"
               ></v-text-field>
             </v-col>
 
@@ -45,7 +51,12 @@
                 placeholder="············"
                 :type="isPasswordVisible ? 'text' : 'password'"
                 :append-inner-icon="isPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
-                @click:append-inner="isPasswordVisible = !isPasswordVisible" outlined
+                @click:append-inner="isPasswordVisible = !isPasswordVisible" outlined aria-autocomplete="off" autocomplete="off"
+                v-on:keyup.enter="onEnter"
+                v-model="passWord"
+                :error-messages="userPassErrorMessages"
+                :error-count="userPassErrorCount"
+                :error="userPassError"
               ></v-text-field>
 
               <!-- remember me checkbox -->
@@ -65,7 +76,7 @@
               <!-- login button -->
               <v-btn
                 block
-                type="submit" color="primary"
+                type="button" color="primary" @click="login"
               >
                 Login
               </v-btn>
@@ -118,9 +129,16 @@
   <!-- </div> -->
 </template>
 
+<style scoped>
+.v-text-field--full-width > .v-input__control > .v-input__slot,
+.v-text-field--outlined > .v-input__control > .v-input__slot {
+    min-height: 48px
+}
+</style>
 
 <script>
-const t = "?t="+Math.random()
+const t = "?t="+Math.random(), BASE_URL = "../../../"
+
 module.exports = {
     components : {
     },
@@ -128,10 +146,65 @@ module.exports = {
     data: function() {
         return {
             title: 'Masterdata Posisi' ,
-            isPasswordVisible: false
+            isPasswordVisible: false,
+
+            // error
+            userNameError: false,
+            userNameErrorCount: 0,
+            userNameErrorMessages: '',
+            userNameErrorMessage: 'Invalid email or password',
+            userPassError: false,
+            userPassErrorCount: 0,
+            userPassErrorMessages: '',
+            userPassErrorMessage: 'This field is required'
         }
     },
 
     computed : {
+      __s () { return this.$store.state.login },
+
+      userName : {
+        get () { return this.__s.userName },
+        set (v) { this.__c("userName", v) }
+      },
+
+      passWord : {
+        get () { return this.__s.passWord },
+        set (v) { this.__c("passWord", v) }
+      },
+
+      message : {
+        get () { return this.__s.message },
+        set (v) { this.__c("message", v) }
+      },
+
+      err () {
+        return this.__s.err
+      },
+
+      logo () {
+        return BASE_URL + 'assets/img/logo-sibambo-small.png'
+      }
+    },
+
+    methods : {
+      __c (a,b) { return this.$store.commit("login/SET_OBJECT", [a, b]) },
+
+      login () {
+        this.$store.dispatch( "login/login" ).then((x) => {
+          if (x.status && x.status == "ERR") {
+            return
+          }
+
+          window.location = "../dashboard";
+        })
+      },
+
+      onEnter () {
+        if (['xs', 'sm', 'md'].indexOf(this.$vuetify.breakpoint.name != 'xs') < 0)
+          return this.login()
+
+          return false
+      }
     }
 }

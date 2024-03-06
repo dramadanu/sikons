@@ -1,5 +1,6 @@
 export const URL = window.location.host.indexOf("onecode") > -1 ? "https://sikons.onecode.id/" : window.location.protocol+"//"+window.location.host+"/sikons/"
 export const APP_NAME = "SIKONS"
+export const APP_REL_ICON = "https://assets-global.website-files.com/63d0f93b8842ec945ab130c6/651a89a898eca9a6ff71af1f_sm-ico-sbm.png"
 
 export async function ajaxPost(u, p, h) {
     try {
@@ -44,6 +45,15 @@ export function moneyFormat(amount, currencySymbol = 'Rp', decimalSeparator = '.
     return formattedString;
 }
 
+const current_date = function() {
+    try {
+        let x = moment().format('YYYY-MM-DD')
+        return x
+    } catch (error) {
+        return null
+    }
+}
+
 export const app = {
     namespaced: true,
     state : {
@@ -54,7 +64,7 @@ export const app = {
         menus: [],
 
         MODULE_TITLE: '',
-        APP_TITLE: 'JERNIHKAN AIR, JERNIHKAN HIDUP',
+        APP_TITLE: 'SIKONS',
         NO_APP_BAR: false,
         USER_TOKEN: localStorage.getItem('token'),
         USER_DATA: localStorage.getItem('user'),
@@ -62,7 +72,8 @@ export const app = {
 
         THEME: 'dark',
 
-        drawer: true
+        drawer: true,
+        currentDate: current_date()
     },
     mutations : {
         set_object(state, v) {

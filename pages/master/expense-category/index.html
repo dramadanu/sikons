@@ -24,7 +24,7 @@
     <body>
         <div id="app">
             <v-app :dark="true">
-                <toolbar :breadcrumb="['Masterdata', 'Posisi']"></toolbar>
+                <toolbar :breadcrumb="['Masterdata', 'Expense']"></toolbar>
                 <navbar></navbar>
                 <v-main>
                     <v-container fluid>
@@ -53,7 +53,6 @@
     </body>
     <style scoped>
     </style>
-
     <script type="module">
   const BASE_URL = "../../../"
   const t = "?t="+Math.random()
@@ -80,10 +79,6 @@
 
     computed: {
       __s () { return this.$store.state.masterPosition },
-
-      
-      logo () { return BASE_URL + 'assets/img/logo-sikons.png' },
-      rel_icon () { return this.$store.state.APP_REL_ICON },
 
       dialog : {
           get () { return this.__s.dialog },

@@ -390,7 +390,8 @@
     position: relative
 }
 
-.v-text-field--filled>.v-input__control>.v-input__slot,.v-text-field--full-width>.v-input__control>.v-input__slot,.v-text-field--outlined>.v-input__control>.v-input__slot {
+.v-text-field--filled > .v-input__control > .v-input__slot,
+.v-text-field--full-width > .v-input__control>.v-input__slot,.v-text-field--outlined>.v-input__control>.v-input__slot {
     align-items: stretch;
     min-height: 36px
 }

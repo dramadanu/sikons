@@ -12,7 +12,7 @@ export default {
         positionNote: '',
         posId: 0,
         edit: false,
-        dialog: true
+        dialog: false
     },
     mutations: {
         SET_OBJECT(state, v) {

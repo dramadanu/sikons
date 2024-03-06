@@ -1,6 +1,6 @@
 // import userModule from './_modules/test.js';
-import { ajaxPost, URL, app, APP_NAME } from "../../../app.js?t=ewr"
-import masterPosition from "../../../modules/master/position.js?t=12re3"
+import { ajaxPost, URL, app, APP_NAME, APP_REL_ICON } from "../../../app.js?t=ewr"
+import login from "../../../modules/user/login.js?t=12re3"
 import misc from "../../../modules/misc/misc.js?t=12re3"
 
 Vue.use(Vuex);
@@ -18,6 +18,7 @@ export const store = new Vuex.Store({
     dark: true,
     state: {
         APP_NAME: APP_NAME,
+        APP_REL_ICON: APP_REL_ICON,
         search_status: 0,
         search_error_message: ""
     },
@@ -37,7 +38,7 @@ export const store = new Vuex.Store({
     },
 
     modules: {
-        masterPosition: masterPosition,
+        login: login,
         misc: misc,
         app: app
     }   

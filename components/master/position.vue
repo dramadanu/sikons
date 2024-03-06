@@ -17,7 +17,7 @@
                         class="elevation-1"
                         hide-default-footer
                     >
-                    <template v-slot:item="{ item }">                                                   
+                    <template v-slot:item="{ item }">
                         <tr @click="select(item)" :class="[isSelected(item)?'blue lighten-5':'']">
                             <td><span v-if="item.position_code.length>2" class="grey--text">{{ '&nbsp'.repeat((item.position_code.length-4)*2) }} ▌ </span>
                                 {{ item.position_name }}</td>

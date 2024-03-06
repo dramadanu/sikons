@@ -1,6 +1,6 @@
 // import userModule from './_modules/test.js';
 import { ajaxPost, URL, app, APP_NAME } from "../../../app.js?t=ewr"
-import masterCustomer from "../../../modules/master/customer.js?t=12re3"
+import masterCustomer from "../../../modules/master/customer.js?t=1s2re3"
 import misc from "../../../modules/misc/misc.js?t=12re3"
 
 Vue.use(Vuex);

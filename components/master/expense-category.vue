@@ -5,8 +5,8 @@
                 <v-card-title primary-title class="py-2">
                     <v-row>
                         <v-col cols="9"><h5 class="font-weight-bold text-h5 text-typo mb-0">DATA EXPENSE</h5>
-                            </v-col>
-                        <v-col cols="3"><searchbar @add="add" @search="search" @change="query"></searchbar></v-col>
+                            <p class="text-sm text-body font-weight-light mb-0"> Features include sorting, searching, pagination, content-editing, and row selection. </p></v-col>
+                        <v-col cols="3"><searchbar @search="search" @change="query"></searchbar></v-col>
                     </v-row>                
                 </v-card-title>
                 <v-card-text class="py-2 px-3">
@@ -17,16 +17,15 @@
                         class="elevation-1"
                         hide-default-footer
                     >
-                    <template v-slot:expense="{ expense }">                                                   
-                        <tr @click="select(expense)" :class="[isSelected(expense)?'blue lighten-5':'']">
-                            <td>{{ expense.expense_id }}</td>
+                    <template v-slot:item="{ item }">
+                        <tr @click="select(item)" :class="[isSelected(item)?'blue lighten-5':'']">
                             <td>{{ expense.expense_code }}</td>
                             <td>{{ expense.expense_name }}</td>
                             <td class="text-center">
-                                <v-btn color="primary" class="btn-icon" icon depressed @click="edit(expense)" small>
+                                <v-btn color="primary" class="" icon depressed @click="edit(item)" small>
                                     <v-icon>mdi-pencil</v-icon>
                                 </v-btn>
-                                <v-btn color="red red-lighten-5--text" icon depressed @click="del(expense)" small>
+                                <v-btn color="red red-lighten-5--text" icon depressed @click="del(item)" small>
                                     <v-icon>mdi-delete</v-icon>
                                 </v-btn>
                             </td>
@@ -64,7 +63,6 @@ module.exports = {
 
         headers () {
             let h = [
-                ['ID', 'expense_id'],
                 ['KODE', 'expense_code'],
                 ['NAMA', 'expense_name']
             ]
@@ -77,13 +75,13 @@ module.exports = {
             return hdrs
         },
 
-        expens () {
-            return this.__s.expens
+        positions () {
+            return this.__s.positions
         },
 
-        selectedexpens : {
-            get () { return this.__s.selectedexpens },
-            set (v) { this.__c("selectedexpens", v) }
+        selectedPosition : {
+            get () { return this.__s.selectedPosition },
+            set (v) { this.__c("selectedPosition", v) }
         },
 
         total () {
@@ -101,10 +99,10 @@ module.exports = {
     },
 
     methods : {
-        __c (a,b) { return this.$store.commit("masterexpense/SET_OBJECT", [a, b]) },
+        __c (a,b) { return this.$store.commit("masterPosition/SET_OBJECT", [a, b]) },
 
         search () {
-            this.$store.dispatch("masterexpense/search")
+            this.$store.dispatch("masterPosition/search")
         },
 
         query (v) {
@@ -113,18 +111,18 @@ module.exports = {
         },
 
         add () {
-            this.__c("expenseCode", "")
-            this.__c("expenseName")
-            this.__c("expenseId", 0)
+            this.__c("positionName", "")
+            this.__c("positionNote")
+            this.__c("posId", 0)
             this.__c("edit", false)
             this.__c("dialog", true)
         },
 
         edit (x) {
             this.select(x)
-            this.__c("expenseCode", x.expense_code)
-            this.__c("expenseName", x.expense_name)
-            this.__c("expenseId", x.expense_id)
+            this.__c("positionName", x.position_name)
+            this.__c("positionNote", x.position_note)
+            this.__c("posId", x.position_id)
             this.__c("edit", true)
             this.__c("dialog", true)
         },
@@ -135,7 +133,7 @@ module.exports = {
         },
 
         doDel () {
-            this.$store.dispatch("masterExpense/delete").then((d) => {
+            this.$store.dispatch("masterPosition/delete").then((d) => {
                 this.$store.commit("misc/SET_OBJECT", ["dialogDelete", false])
                 this.search()
             })
@@ -146,8 +144,8 @@ module.exports = {
         },
 
         isSelected (x) {
-            if (!x || !this.selectedexpense) return false
-            if (x.expense_id == this.selectedexpense.expense_id) return true
+            if (!x || !this.selectedPosition) return false
+            if (x.position_id == this.selectedPosition.position_id) return true
             return false
         }
     },

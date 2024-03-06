@@ -1,17 +1,17 @@
 <?php
 
-class Expense extends MY_Controller
+class Position extends MY_Controller
 {
     function __construct()
     {
         parent::__construct();
 
-        $this->load->model('master/m_expense');
+        $this->load->model('master/m_position');
     }
 
     function search()
     {
-        $r = $this->m_expense->search([
+        $r = $this->m_position->search([
             'search'=>'%'.$this->sys_input['search'].'%', 
             'limit'=>10, 
             'page'=>$this->sys_input['page']]);
@@ -20,8 +20,8 @@ class Expense extends MY_Controller
 
     function search_dd()
     {
-        $r = $this->m_expense->search([
-            'search'=>'%'.$this->m_expense['search'].'%', 
+        $r = $this->m_position->search([
+            'search'=>'%'.$this->sys_input['search'].'%', 
             'limit'=>99999, 
             'page'=>1]);
         $this->sys_ok($r);
@@ -30,10 +30,10 @@ class Expense extends MY_Controller
     function save()
     {
         // $this->sys_input['user_id'] = $this->sys_user['user_id'];
-        if (isset($this->sys_input['item_id']))
-            $r = $this->m_expense->save( $this->sys_input, $this->sys_input['item_id'] );
+        if (isset($this->sys_input['position_id']))
+            $r = $this->m_position->save( $this->sys_input, $this->sys_input['position_id'] );
         else
-            $r = $this->m_expense->save( $this->sys_input );
+            $r = $this->m_position->save( $this->sys_input );
         
         if ($r->status == "OK")
             $this->sys_ok($r->data);
@@ -43,7 +43,7 @@ class Expense extends MY_Controller
 
     function del()
     {
-        $r = $this->m_expense->del( $this->sys_input );
+        $r = $this->m_position->del( $this->sys_input );
         $this->sys_ok($r);
     }
 }

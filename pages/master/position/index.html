@@ -81,9 +81,6 @@
     computed: {
       __s () { return this.$store.state.masterPosition },
 
-      logo () { return BASE_URL + 'assets/img/logo-sikons.png' },
-      rel_icon () { return this.$store.state.APP_REL_ICON },
-
       dialog : {
           get () { return this.__s.dialog },
           set (v) { this.__c("dialog", v) }

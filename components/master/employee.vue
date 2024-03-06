@@ -2,12 +2,11 @@
     <v-row>
         <v-col cols="12">
             <v-card>
-                <v-card-title primary-title class="py-2">
+                <v-card-title primary-title class="bg-info white--text py-2">
                     <v-row>
-                        <v-col cols="9"><h5 class="font-weight-bold text-h5 text-typo mb-0">DATA KARYAWAN</h5>
-                            </v-col>
+                        <v-col cols="9"><h3 class="display-1">DATA KARYAWAN</h3></v-col>
                         <v-col cols="3"><searchbar @add="add" @search="search" @change="query"></searchbar></v-col>
-                    </v-row>            
+                    </v-row>                
                 </v-card-title>
                 <v-card-text class="py-2 px-3">
                     <v-data-table
@@ -18,18 +17,20 @@
                         hide-default-footer
                     >
                     <template v-slot:item="{ item }">
-                        <tr @click="select(item)" :class="[isSelected(item)?'blue lighten-5':'']">
-                            <td>{{ item.employee_name }}</td>
+                        <tr>
+                            <td>
+                                {{ item.employee_name }}
+                            </td>
                             <td>{{ item.employee_position }}</td>
                             <td>{{ item.employee_address }}</td>
                             <td>{{ item.employee_city }}</td>
                             <td>{{ item.employee_note }}</td>
                             <td class="text-center">
                                 <v-btn-toggle>
-                                    <v-btn color="primary" class="btn-icon" depressed @click="edit(item)" small>
+                                    <v-btn color="" class="btn-icon" depressed @click="edit(item)">
                                         <v-icon>mdi-pencil</v-icon>
                                     </v-btn>
-                                    <v-btn color="red red-lighten-5--text" class="btn-icon" depressed @click="del(item)" small>
+                                    <v-btn color="red red-lighten-5--text" class="btn-icon" depressed @click="del(item)">
                                         <v-icon>mdi-delete</v-icon>
                                     </v-btn>
                                 </v-btn-toggle>
@@ -60,7 +61,8 @@ module.exports = {
 
     data: function() {
         return {
-            title: 'Masterdata Posisi' 
+            
+            
         }
     },
 
